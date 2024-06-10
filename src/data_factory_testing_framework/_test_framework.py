@@ -13,7 +13,7 @@ from data_factory_testing_framework._repositories.data_factory_repository import
 from data_factory_testing_framework.exceptions import (
     NoRemainingPipelineActivitiesMeetDependencyConditionsError,
 )
-from data_factory_testing_framework.models import Pipeline
+from data_factory_testing_framework.models import Dataflow, Pipeline
 from data_factory_testing_framework.models.activities import (
     Activity,
     ControlActivity,
@@ -60,12 +60,12 @@ class TestFramework:
             if root_folder_path is not None:
                 self._repository = FabricRepositoryFactory().parse_from_folder(root_folder_path)
             else:
-                self._repository = DataFactoryRepository([])
+                self._repository = DataFactoryRepository([], [])
         elif self._framework_type == TestFrameworkType.DataFactory:
             if root_folder_path is not None:
                 self._repository = DataFactoryRepositoryFactory().parse_from_folder(root_folder_path)
             else:
-                self._repository = DataFactoryRepository([])
+                self._repository = DataFactoryRepository([], [])
         elif self._framework_type == TestFrameworkType.Synapse:
             raise NotImplementedError("Synapse test framework is not implemented yet.")
 
@@ -223,3 +223,14 @@ class TestFramework:
             or isinstance(activity, SwitchActivity)
             or isinstance(activity, ExecutePipelineActivity)
         )
+
+    def get_dataflow_by_name(self, name: str) -> Dataflow:
+        """Gets a pipeline by name.
+
+        Args:
+            name: The name of the pipeline to get.
+
+        Returns:
+            The pipeline with the given name.
+        """
+        return self._repository.get_dataflow_by_name(name)

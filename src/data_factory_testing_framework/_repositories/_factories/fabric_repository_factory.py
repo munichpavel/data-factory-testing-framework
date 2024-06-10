@@ -1,13 +1,14 @@
 import codecs
 import json
 import os
+import warnings
 from typing import List
 
 from data_factory_testing_framework._deserializers._deserializer_fabric import (
     parse_fabric_pipeline_from_pipeline_json_files,
 )
 from data_factory_testing_framework._repositories._factories.base_repository_factory import BaseRepositoryFactory
-from data_factory_testing_framework.models import Pipeline
+from data_factory_testing_framework.models import Dataflow, Pipeline
 
 REQUIRED_FILES = ["pipeline-content.json", ".platform"]
 
@@ -75,3 +76,7 @@ class FabricRepositoryFactory(BaseRepositoryFactory):
                 return "utf-16"
             else:
                 return "utf-8"
+
+    def _get_data_factory_dataflows_by_folder_path(self, folder_path: str) -> list[Dataflow]:
+        warnings.warn("This method is not yet implemented. Returning an empty list", stacklevel=1)
+        return []

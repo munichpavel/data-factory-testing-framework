@@ -4,7 +4,7 @@ import typing
 from typing import Optional
 
 from data_factory_testing_framework import TestFrameworkType
-from data_factory_testing_framework.models import Pipeline
+from data_factory_testing_framework.models import Dataflow, Pipeline
 from data_factory_testing_framework.models.activities import Activity
 from data_factory_testing_framework.state import PipelineRunState, RunParameter
 
@@ -24,6 +24,7 @@ def test_test_framework_api() -> None:
         "evaluate_activity",
         "evaluate_pipeline",
         "framework_type",
+        "get_dataflow_by_name",
         "get_pipeline_by_id",
         "get_pipeline_by_name",
         "should_evaluate_child_pipelines",
@@ -42,6 +43,7 @@ def test_test_framework_method_types() -> None:
         "evaluate_activities": types.FunctionType,
         "evaluate_activity": types.FunctionType,
         "evaluate_pipeline": types.FunctionType,
+        "get_dataflow_by_name": types.FunctionType,
         "get_pipeline_by_id": types.FunctionType,
         "get_pipeline_by_name": types.FunctionType,
         "framework_type": property,
@@ -127,6 +129,13 @@ def test_test_framework_method_signatures() -> None:
                 ),
             ],
             return_annotation=typing.Iterator[Activity],
+        ),
+        "get_dataflow_by_name": inspect.Signature(
+            parameters=[
+                inspect.Parameter(name="self", kind=inspect.Parameter.POSITIONAL_OR_KEYWORD),
+                inspect.Parameter(name="name", kind=inspect.Parameter.POSITIONAL_OR_KEYWORD, annotation=str),
+            ],
+            return_annotation=Dataflow,
         ),
         "get_pipeline_by_id": inspect.Signature(
             parameters=[

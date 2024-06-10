@@ -4,7 +4,7 @@ from data_factory_testing_framework._deserializers.shared._activity_deserializer
 from data_factory_testing_framework._deserializers.shared._data_factory_element_replacer import (
     _find_and_replace_expressions_in_dict,
 )
-from data_factory_testing_framework.models import Pipeline
+from data_factory_testing_framework.models import Dataflow, Pipeline
 
 
 def _parse_pipeline_from_json(pipeline_id: str, name: str, json_data: dict) -> Pipeline:
@@ -19,3 +19,11 @@ def _parse_pipeline_from_json(pipeline_id: str, name: str, json_data: dict) -> P
     _find_and_replace_expressions_in_dict(pipeline)
 
     return pipeline
+
+
+def _parse_dataflow_from_json(name: str, json_data: dict) -> Pipeline:
+    properties = json_data.get("properties", {})
+
+    dataflow = Dataflow(name, **properties)
+
+    return dataflow

@@ -5,6 +5,7 @@ from data_factory_testing_framework.exceptions._activity_output_field_not_found_
 from data_factory_testing_framework.exceptions._data_factory_element_evaluation_error import (
     DataFactoryElementEvaluationError,
 )
+from data_factory_testing_framework.exceptions._dataflow_not_found_error import DataflowNotFoundError
 from data_factory_testing_framework.exceptions._function_call_invalid_arguments_count_error import (
     FunctionCallInvalidArgumentsCountError,
 )
@@ -28,6 +29,7 @@ __all__ = [
     "ParameterNotFoundError",
     "NoRemainingPipelineActivitiesMeetDependencyConditionsError",
     "PipelineNotFoundError",
+    "DataflowNotFoundError",
     "StateIterationItemNotSetError",
     "UnsupportedFunctionError",
     "VariableBeingEvaluatedDoesNotExistError",
